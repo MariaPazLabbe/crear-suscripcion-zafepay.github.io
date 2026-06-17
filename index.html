@@ -49,7 +49,6 @@
       margin-bottom: 1.5rem;
     }
 
-    /* Sections */
     .section {
       background: var(--white);
       border-radius: 12px;
@@ -113,7 +112,6 @@
 
     .sec-body { padding: 1.25rem 1.5rem; }
 
-    /* Fields */
     .field { margin-bottom: 14px; }
     .field:last-child { margin-bottom: 0; }
 
@@ -143,10 +141,8 @@
       font-weight: 600;
       cursor: help;
       flex-shrink: 0;
-      text-decoration: none;
     }
 
-    /* Inputs & Selects */
     .inp, .sel {
       width: 100%;
       border: 1px solid var(--border);
@@ -179,10 +175,15 @@
       padding-right: 30px;
     }
 
-    /* Layout helpers */
     .row2 {
       display: grid;
       grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .row3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
       gap: 12px;
     }
 
@@ -231,6 +232,20 @@
 
     .inp-prefix input::placeholder { color: #c0c2d8; }
 
+    /* Conditional sub-block */
+    .sub-block {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin-top: 8px;
+      display: none;
+    }
+
+    .sub-block.visible { display: block; }
+
+    .sub-block .field:last-child { margin-bottom: 0; }
+
     /* Upload */
     .upload-box {
       border: 1.5px dashed var(--border);
@@ -267,7 +282,6 @@
       margin-top: 3px;
     }
 
-    /* Link button */
     .link-btn {
       font-size: 13px;
       color: var(--blue);
@@ -280,10 +294,8 @@
       border: none;
       padding: 0;
       font-family: 'Poppins', sans-serif;
-      text-decoration: none;
     }
 
-    /* Products empty */
     .products-empty {
       border: 1px dashed var(--border);
       border-radius: 8px;
@@ -299,7 +311,7 @@
       color: var(--gray);
     }
 
-    /* Mora conditional block */
+    /* Mora block */
     .cond-block {
       background: var(--bg);
       border: 1px solid var(--border);
@@ -323,7 +335,6 @@
       padding-bottom: 10px;
     }
 
-    /* Warning box */
     .warn-box {
       background: #fffdf0;
       border: 1px solid #f0d96a;
@@ -340,7 +351,6 @@
       line-height: 1.65;
     }
 
-    /* Fixed fields */
     .fixed-field {
       display: flex;
       align-items: center;
@@ -348,8 +358,6 @@
       padding: 10px 0;
       border-bottom: 1px solid var(--border);
     }
-
-    .fixed-field:last-of-type { border-bottom: 1px solid var(--border); }
 
     .fixed-label {
       font-size: 13px;
@@ -364,7 +372,6 @@
       margin-top: 1px;
     }
 
-    /* Badges */
     .badge {
       font-size: 10px;
       font-weight: 500;
@@ -375,11 +382,10 @@
     }
 
     .b-fixed { background: var(--mint-soft); color: var(--mint); }
-    .b-opt { background: var(--blue-soft); color: var(--blue); }
-    .b-req { background: #fdeaea; color: var(--coral); }
-    .b-cond { background: #fffaec; color: #8a6500; }
+    .b-opt   { background: var(--blue-soft); color: var(--blue); }
+    .b-req   { background: #fdeaea; color: var(--coral); }
+    .b-cond  { background: #fffaec; color: #8a6500; }
 
-    /* Checkbox row */
     .check-row {
       display: flex;
       align-items: center;
@@ -410,7 +416,6 @@
       background-position: center;
     }
 
-    /* Section divider labels */
     .divider-label {
       font-size: 11px;
       font-weight: 600;
@@ -422,7 +427,6 @@
 
     .divider-label:first-child { margin-top: 0; }
 
-    /* Save button */
     .save-btn {
       width: 100%;
       padding: 13px;
@@ -448,7 +452,7 @@
     }
 
     @media (max-width: 560px) {
-      .row2 { grid-template-columns: 1fr; }
+      .row2, .row3 { grid-template-columns: 1fr; }
       .price-row { grid-template-columns: 90px 1fr; }
     }
   </style>
@@ -474,25 +478,16 @@
         <div class="row2" style="align-items: start; gap: 20px;">
           <div>
             <div class="field">
-              <div class="field-label">
-                Nombre <span class="req">*</span>
-                <span class="badge b-req">Obligatorio</span>
-              </div>
+              <div class="field-label">Nombre <span class="req">*</span> <span class="badge b-req">Obligatorio</span></div>
               <input class="inp" type="text" placeholder="Ej: Plan Mensual Premium">
             </div>
             <div class="field">
-              <div class="field-label">
-                Descripción
-                <span class="badge b-opt">Opcional</span>
-              </div>
+              <div class="field-label">Descripción <span class="badge b-opt">Opcional</span></div>
               <textarea class="inp inp-ta" placeholder="Describe brevemente tu suscripción…"></textarea>
             </div>
           </div>
           <div>
-            <div class="field-label" style="margin-bottom: 8px;">
-              Imagen de la suscripción
-              <span class="badge b-opt">Recomendado</span>
-            </div>
+            <div class="field-label" style="margin-bottom: 8px;">Imagen de la suscripción <span class="badge b-opt">Recomendado</span></div>
             <div class="upload-box">
               <div class="upload-icon">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4653e3" stroke-width="2">
@@ -547,12 +542,10 @@
         </svg>
       </div>
       <div class="sec-body">
+
+        <!-- Precio -->
         <div class="field">
-          <div class="field-label">
-            Precio de la suscripción <span class="req">*</span>
-            <span class="badge b-req">Obligatorio</span>
-            <span class="help">?</span>
-          </div>
+          <div class="field-label">Precio de la suscripción <span class="req">*</span> <span class="badge b-req">Obligatorio</span> <span class="help">?</span></div>
           <div class="price-row">
             <select class="sel">
               <option>CLP</option>
@@ -565,53 +558,126 @@
             </div>
           </div>
         </div>
-        <div class="row2">
-          <div class="field">
-            <div class="field-label">
-              Recurrencia en el cobro <span class="req">*</span>
-              <span class="badge b-req">Obligatorio</span>
-              <span class="help">?</span>
+
+        <!-- Recurrencia -->
+        <div class="field">
+          <div class="field-label">Recurrencia en el cobro <span class="req">*</span> <span class="badge b-req">Obligatorio</span> <span class="help">?</span></div>
+          <select class="sel" id="recurrencia-sel">
+            <option value="">Seleccionar</option>
+            <option value="semanal">Semanal</option>
+            <option value="quincenal">Quincenal</option>
+            <option value="mensual">Mensual</option>
+            <option value="trimestral">Trimestral</option>
+            <option value="semestral">Semestral</option>
+            <option value="anual">Anual</option>
+            <option value="personalizada">Personalizada</option>
+          </select>
+          <div class="sub-block" id="recurrencia-custom">
+            <div class="field" style="margin-bottom: 0;">
+              <div class="field-label">Cada cuántos días <span class="help">?</span></div>
+              <div class="inp-prefix">
+                <span>días</span>
+                <input type="number" placeholder="Ej: 45" min="1">
+              </div>
             </div>
-            <select class="sel">
-              <option value="">Seleccionar</option>
-              <option>Semanal</option>
-              <option>Mensual</option>
-              <option>Anual</option>
-            </select>
-          </div>
-          <div class="field">
-            <div class="field-label">
-              Primer cobro
-              <span class="help">?</span>
-            </div>
-            <select class="sel">
-              <option>Cuando el cliente se suscriba</option>
-              <option>En fecha específica</option>
-            </select>
-          </div>
-        </div>
-        <div class="row2">
-          <div class="field">
-            <div class="field-label">
-              Día del pago
-              <span class="help">?</span>
-            </div>
-            <select class="sel">
-              <option>Distinto por cliente</option>
-              <option>Día fijo del mes</option>
-            </select>
-          </div>
-          <div class="field">
-            <div class="field-label">
-              Descuento para nuevos suscriptores
-              <span class="help">?</span>
-            </div>
-            <select class="sel">
-              <option>No</option>
-              <option>Sí</option>
-            </select>
           </div>
         </div>
+
+        <div class="row2">
+          <!-- Primer cobro -->
+          <div class="field">
+            <div class="field-label">Primer cobro <span class="help">?</span></div>
+            <select class="sel" id="primer-cobro-sel">
+              <option value="suscripcion">Cuando el cliente se suscriba</option>
+              <option value="fecha">En fecha específica</option>
+            </select>
+            <div class="sub-block" id="primer-cobro-fecha">
+              <div class="field" style="margin-bottom: 0;">
+                <div class="field-label">Fecha del primer cobro</div>
+                <input class="inp" type="date">
+              </div>
+            </div>
+          </div>
+
+          <!-- Día del pago -->
+          <div class="field">
+            <div class="field-label">Día del pago <span class="help">?</span></div>
+            <select class="sel" id="dia-pago-sel">
+              <option value="cliente">Distinto por cliente</option>
+              <option value="fijo">Día fijo para todos</option>
+            </select>
+            <div class="sub-block" id="dia-pago-fijo">
+              <div class="field" style="margin-bottom: 0;">
+                <div class="field-label">Día del mes (1–28)</div>
+                <input class="inp" type="number" placeholder="Ej: 5" min="1" max="28">
+                <p class="hint-text">Se usará este día para todos los suscriptores</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Descuento promocional -->
+        <div class="field">
+          <div class="field-label">Descuento para nuevos suscriptores <span class="help">?</span></div>
+          <select class="sel" id="descuento-sel">
+            <option value="no">No</option>
+            <option value="si">Sí</option>
+          </select>
+          <div class="sub-block" id="descuento-fields">
+            <div class="row3">
+              <div class="field">
+                <div class="field-label">% Descuento</div>
+                <div class="inp-prefix">
+                  <span>%</span>
+                  <input type="number" placeholder="0" min="0" max="100" step="0.1">
+                </div>
+              </div>
+              <div class="field">
+                <div class="field-label">Periodos</div>
+                <input class="inp" type="number" placeholder="Ej: 3" min="1">
+              </div>
+              <div class="field">
+                <div class="field-label">Cuotas con descuento</div>
+                <input class="inp" type="number" placeholder="Ej: 2" min="1">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tarifa por servicio -->
+        <div class="field">
+          <div class="field-label">Tarifa por servicio <span class="help">?</span></div>
+          <select class="sel" id="tarifa-sel">
+            <option value="no">No</option>
+            <option value="si">Sí</option>
+          </select>
+          <div class="sub-block" id="tarifa-fields">
+            <div class="row2">
+              <div class="field">
+                <div class="field-label">Tipo de tarifa</div>
+                <select class="sel">
+                  <option>Monto fijo</option>
+                  <option>Porcentaje</option>
+                </select>
+              </div>
+              <div class="field">
+                <div class="field-label">Moneda</div>
+                <select class="sel">
+                  <option>CLP</option>
+                  <option>UF</option>
+                </select>
+              </div>
+            </div>
+            <div class="field" style="margin-bottom: 0;">
+              <div class="field-label">Monto</div>
+              <div class="inp-prefix">
+                <span>$</span>
+                <input type="number" placeholder="0" min="0">
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -630,28 +696,19 @@
       <div class="sec-body">
         <div class="row2">
           <div class="field">
-            <div class="field-label">
-              Duración de la suscripción
-              <span class="help">?</span>
-            </div>
+            <div class="field-label">Duración de la suscripción <span class="help">?</span></div>
             <select class="sel">
               <option>Indefinida</option>
               <option>Número de cobros</option>
             </select>
           </div>
           <div class="field">
-            <div class="field-label">
-              Expiración de la suscripción
-              <span class="help">?</span>
-            </div>
+            <div class="field-label">Expiración de la suscripción <span class="help">?</span></div>
             <input class="inp" type="date">
           </div>
         </div>
         <div class="field">
-          <div class="field-label">
-            Expiración del link de pago
-            <span class="help">?</span>
-          </div>
+          <div class="field-label">Expiración del link de pago <span class="help">?</span></div>
           <input class="inp" type="datetime-local">
         </div>
       </div>
@@ -673,32 +730,42 @@
       </div>
       <div class="sec-body">
         <div class="row2">
+          <!-- Límite de inscripciones -->
           <div class="field">
-            <div class="field-label">
-              Límite de inscripciones
-              <span class="help">?</span>
-            </div>
-            <select class="sel">
-              <option>No</option>
-              <option>Sí</option>
+            <div class="field-label">Límite de inscripciones <span class="help">?</span></div>
+            <select class="sel" id="limite-sel">
+              <option value="no">No</option>
+              <option value="si">Sí</option>
             </select>
+            <div class="sub-block" id="limite-fields">
+              <div class="field" style="margin-bottom: 0;">
+                <div class="field-label">Número máximo de inscripciones</div>
+                <input class="inp" type="number" placeholder="Ej: 100" min="1">
+              </div>
+            </div>
           </div>
+
+          <!-- Eliminar inscripciones abandonadas -->
           <div class="field">
-            <div class="field-label">
-              Eliminar inscripciones abandonadas
-              <span class="help">?</span>
-            </div>
-            <select class="sel">
-              <option>No</option>
-              <option>Sí</option>
+            <div class="field-label">Eliminar inscripciones abandonadas <span class="help">?</span></div>
+            <select class="sel" id="abandonadas-sel">
+              <option value="no">No</option>
+              <option value="si">Sí</option>
             </select>
+            <div class="sub-block" id="abandonadas-fields">
+              <div class="field" style="margin-bottom: 0;">
+                <div class="field-label">Eliminar después de (días)</div>
+                <div class="inp-prefix">
+                  <span>días</span>
+                  <input type="number" placeholder="Ej: 7" min="1">
+                </div>
+              </div>
+            </div>
           </div>
         </div>
+
         <div class="field">
-          <div class="field-label">
-            Deuda acumulable
-            <span class="help">?</span>
-          </div>
+          <div class="field-label">Deuda acumulable <span class="help">?</span></div>
           <select class="sel">
             <option>No</option>
             <option>Sí</option>
@@ -722,10 +789,7 @@
       </div>
       <div class="sec-body">
         <div class="field">
-          <div class="field-label">
-            Activar cargo por mora
-            <span class="help">?</span>
-          </div>
+          <div class="field-label">Activar cargo por mora <span class="help">?</span></div>
           <select class="sel" id="mora-toggle">
             <option value="no">No</option>
             <option value="si">Sí</option>
@@ -742,11 +806,7 @@
           </div>
           <div class="row2">
             <div class="field">
-              <div class="field-label">
-                Porcentaje (%)
-                <span class="badge b-cond">Condicional</span>
-                <span class="help">?</span>
-              </div>
+              <div class="field-label">Porcentaje (%) <span class="badge b-cond">Condicional</span> <span class="help">?</span></div>
               <div class="inp-prefix">
                 <span>%</span>
                 <input type="number" placeholder="0" min="0" max="3.44" step="0.01">
@@ -754,32 +814,20 @@
               <p class="hint-text">Mayor a 0 y ≤ 3.44% mensual</p>
             </div>
             <div class="field">
-              <div class="field-label">
-                Días de gracia
-                <span class="badge b-cond">Condicional</span>
-                <span class="help">?</span>
-              </div>
+              <div class="field-label">Días de gracia <span class="badge b-cond">Condicional</span> <span class="help">?</span></div>
               <input class="inp" type="number" placeholder="0" min="0">
-              <p class="hint-text">Días después de la fecha de vencimiento</p>
+              <p class="hint-text">Días después del vencimiento</p>
             </div>
           </div>
           <div class="field">
-            <div class="field-label">
-              Recurrencia del cargo
-              <span class="badge b-cond">Condicional</span>
-              <span class="help">?</span>
-            </div>
+            <div class="field-label">Recurrencia del cargo <span class="badge b-cond">Condicional</span> <span class="help">?</span></div>
             <select class="sel">
               <option>Una sola vez</option>
               <option>Mensual</option>
             </select>
           </div>
           <div class="field" style="margin-bottom: 0;">
-            <div class="field-label">
-              Términos y condiciones
-              <span class="badge b-cond">Condicional</span>
-              <span class="help">?</span>
-            </div>
+            <div class="field-label">Términos y condiciones <span class="badge b-cond">Condicional</span> <span class="help">?</span></div>
             <input class="inp" type="url" placeholder="https://tuempresa.com/terminos-y-condiciones">
             <div class="warn-box">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#c4980a" stroke-width="2" style="flex-shrink: 0; margin-top: 1px;">
@@ -846,16 +894,38 @@
   </div>
 
   <script>
-    const moraToggle = document.getElementById('mora-toggle');
-    const moraFields = document.getElementById('mora-fields');
+    function toggle(selectId, blockId, activeValue) {
+      const sel = document.getElementById(selectId);
+      const block = document.getElementById(blockId);
+      if (!sel || !block) return;
+      const update = () => block.classList.toggle('visible', sel.value === activeValue);
+      sel.addEventListener('change', update);
+      update();
+    }
 
-    moraToggle.addEventListener('change', function () {
-      if (this.value === 'si') {
-        moraFields.classList.add('visible');
-      } else {
-        moraFields.classList.remove('visible');
-      }
-    });
+    // Mora
+    toggle('mora-toggle', 'mora-fields', 'si');
+
+    // Primer cobro → fecha específica
+    toggle('primer-cobro-sel', 'primer-cobro-fecha', 'fecha');
+
+    // Día del pago → día fijo
+    toggle('dia-pago-sel', 'dia-pago-fijo', 'fijo');
+
+    // Recurrencia → personalizada
+    toggle('recurrencia-sel', 'recurrencia-custom', 'personalizada');
+
+    // Descuento → Sí
+    toggle('descuento-sel', 'descuento-fields', 'si');
+
+    // Tarifa por servicio → Sí
+    toggle('tarifa-sel', 'tarifa-fields', 'si');
+
+    // Límite de inscripciones → Sí
+    toggle('limite-sel', 'limite-fields', 'si');
+
+    // Eliminar abandonadas → Sí
+    toggle('abandonadas-sel', 'abandonadas-fields', 'si');
   </script>
 </body>
 </html>
